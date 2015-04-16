@@ -1,0 +1,19 @@
+{
+  "name": "CoffeeScript",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ../../bin/react-native-webpack-server start",
+    "hot": "HOT=1 node ../../bin/react-native-webpack-server start --hot"
+  },
+  "dependencies": {
+    "cjsx-loader": "^2.0.1",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.9.1",
+    "react": "^0.13.1",
+    "react-hot-loader": "^1.2.4",
+    "react-native": "^0.3.11",
+    "webpack": "^1.8.4",
+    "webpack-dev-server": "^1.8.0"
+  }
+}

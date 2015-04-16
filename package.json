@@ -1,0 +1,25 @@
+{
+  "name": "react-native-webpack-server",
+  "version": "0.1.0",
+  "description": "Build React Native apps with Webpack",
+  "main": "lib/Server.js",
+  "author": {
+    "name": "Michael Johnston",
+    "email": "mjohnston16@gmail.com",
+    "url": "https://github.com/mjohnston"
+  },
+  "license": "MIT",
+  "bin": "./bin/react-native-webpack-server.js",
+  "peerDependencies": {
+    "react-hot-loader": "^1.2.4",
+    "react-native": "^0.3.11",
+    "webpack": "^1.8.4",
+    "webpack-dev-server": "^1.8.0"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.24",
+    "connect": "^3.3.5",
+    "source-map": "^0.4.2",
+    "nomnom": "^1.8.1"
+  }
+}
