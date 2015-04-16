@@ -12,3 +12,5 @@ To run with hot reload:
 ```
 npm run hot
 ```
+
+Hot reload only works with the web socket executor (hit CMD+D in the simulator) or the WebView executor (CMD+CTRL+Z -> Enable Safari Debugging). See [the explanatory note](https://github.com/mjohnston/react-native-webpack-server#hot-reload).
