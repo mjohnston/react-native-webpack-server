@@ -54,7 +54,7 @@ You'll also need to configure Webpack. See the [Babel+ES6 config](https://github
 
 The examples in this repo use a relative path `../../` to link to react-native-webpack-server. You'll need to replace these with the node.js module path: `react-native-webpack-server`. The 2 places you will see this are in `package.json` scripts and `webpack.config.js` hot loader entry.
 
-**NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator). If you regurlarly use this feature, you might want to default to the web socket exeuctor in development:
+**NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator) or the WebView executor (CMD+CTRL+Z -> Enable Safari Debugging). If you regurlarly use this feature, you might want to default to the web socket exeuctor in development:
 
 RCTBridge.m:
 ```objc
@@ -67,6 +67,8 @@ RCTBridge.m:
   ...
   }
 ```
+
+Replace `RCTWebSocketExecutor` with `RCTWebViewExecutor` if you wish to use the Safari WebKit inspector instead of the Chrome dev tools.
 
 ## FAQ
 
