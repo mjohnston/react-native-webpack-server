@@ -1,5 +1,6 @@
 .DS_STORE
 node_modules
+npm-debug.log
 build
 _entry
 *.pbxuser
