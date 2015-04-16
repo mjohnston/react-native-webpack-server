@@ -1,5 +1,9 @@
 ## Running the example app
 
+First run `npm install` from the root of this repository (this is needed since the examples reference react-native-webpack-server locally).
+
+Install the example app dependencies and start the server:
+
 ```
 npm install
 npm start
