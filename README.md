@@ -32,6 +32,12 @@ This will start the server on port 8080. The last step is to change the URL of y
 jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];
 ```
 
+To run the development server:
+
+```
+npm start
+```
+
 ## Source Maps
 
 Current solutions for building React Native bundles with Webpack lose source maps. This is because the Webpack bundle is first built and then passed off to the React Packager which [constructs the source map by hand](https://github.com/facebook/react-native/blob/master/packager/react-packager/src/Packager/Package.js#L149). This is done for speed, but it also means you can only use transforms that map lines 1 to 1.
@@ -43,6 +49,8 @@ React Native Webpack Server enables source maps by generating the react-native a
 Since this is built on Webpack you can now leverage the growing ecosystem of addons such as [React Hot Loader](https://github.com/gaearon/react-hot-loader).
 
 To enable hot reload, make sure you first install the `react-hot-loader` package and then start the server with `--hot=1`.
+
+You'll also need to configure Webpack. See the [Babel+ES6 config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js) for an example.
 
 **NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator). If you regurlarly use this feature, you might want to default to the web socket exeuctor in development:
 
