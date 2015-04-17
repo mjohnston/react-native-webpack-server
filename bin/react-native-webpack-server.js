@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var path = require('path');
+var fs = require('fs');
 var parser = require('nomnom');
 var Server = require('../lib/Server');
 
@@ -27,6 +29,15 @@ parser.command('start')
     default: false,
   })
   .callback(function(opts) {
+    opts.webpackConfigPath = path.resolve(process.cwd(), opts.webpackConfigPath);
+    if (fs.existsSync(opts.webpackConfigPath)) {
+      opts.webpackConfig = require(path.resolve(process.cwd(), opts.webpackConfigPath));
+    } else {
+      throw new Error('Must specify webpackConfigPath or create ./webpack.config.js');
+-     process.exit(1);
+    }
+    delete opts.webpackConfigPath;
+
     (new Server(opts)).start();
   });
 
