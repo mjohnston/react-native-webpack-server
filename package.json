@@ -10,6 +10,13 @@
   },
   "license": "MIT",
   "bin": "./bin/react-native-webpack-server.js",
+  "files": [
+    "bin",
+    "hot",
+    "lib",
+    "LICENSE",
+    "README.md"
+  ],
   "peerDependencies": {
     "react-hot-loader": ">=1.2.4",
     "react-native": ">=0.3.11",
