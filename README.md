@@ -72,10 +72,6 @@ Replace `RCTWebSocketExecutor` with `RCTWebViewExecutor` if you wish to use the 
 
 ## FAQ
 
-**Sometimes the text disappears when using hot reload.**
-
-That is a [known bug](https://github.com/facebook/react-native/issues/813).
-
 **I get the red box of death when using hot reload even after fixing the exception.**
 
 Your code is still executing. Dismiss the red box using the `Esc` key.
