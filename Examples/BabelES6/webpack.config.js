@@ -38,4 +38,10 @@ if (process.env.HOT) {
   config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
 }
 
+// Production config
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
 module.exports = config;

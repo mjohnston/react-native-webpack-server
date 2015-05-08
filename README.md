@@ -70,6 +70,20 @@ RCTBridge.m:
 
 Replace `RCTWebSocketExecutor` with `RCTWebViewExecutor` if you wish to use the Safari WebKit inspector instead of the Chrome dev tools.
 
+## Packaging for release
+
+When you are ready to ship your app, you will want to generate a minified bundle and package it in the binary. You can build a minified bundle using the `dev` and `minify` URL parameters. Setting these to `false` or `0` will tell the React Native packager to minify and remove debug code.
+
+In your webpack config, you will likely want to enable the `UglifyJsPlugin`. The sample apps are configured to enable minification when `process.env.NODE_ENV` is set to `production`. See the [BabelES6 webpack config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js#L41) for an example.
+
+To generate and copy the minified bundle into the iOS project:
+
+```
+curl 'http://localhost:8080/index.ios.bundle?dev=false&minify=true' -o iOS/main.jsbundle
+```
+
+You will need to uncomment [this line](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/iOS/AppDelegate.m#L37) in `AppDelegate.m` in order to load the local bundle.
+
 ## FAQ
 
 **I get the red box of death when using hot reload even after fixing the exception.**
