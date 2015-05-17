@@ -19,7 +19,7 @@
   ],
   "peerDependencies": {
     "react-hot-loader": ">=1.2.4",
-    "react-native": "<0.4.3",
+    "react-native": ">=0.4.3",
     "webpack": ">=1.8.4",
     "webpack-dev-server": ">=1.8.0"
   },
