@@ -88,6 +88,10 @@ You will need to uncomment [this line](https://github.com/mjohnston/react-native
 
 ## FAQ
 
+**I can't import 3rd party modules in my project.**
+
+Most react-native 3rd party modules are published to npm in ES6+ since the react-native packager handles transpiling. You may need to whitelist these modules in your webpack config, as the default configuration in the example excludes all of node_modules. See [issue #34](https://github.com/mjohnston/react-native-webpack-server/issues/34).
+
 **I get the red box of death when using hot reload even after fixing the exception.**
 
 Your code is still executing. Dismiss the red box using the `Esc` key.
