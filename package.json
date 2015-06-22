@@ -1,6 +1,6 @@
 {
   "name": "react-native-webpack-server",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Build React Native apps with Webpack",
   "main": "lib/Server.js",
   "author": {
@@ -8,6 +8,17 @@
     "email": "mjohnston16@gmail.com",
     "url": "https://github.com/mjohnston"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjohnston/react-native-webpack-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mjohnston/react-native-webpack-server/issues"
+  },
+  "keywords": [
+    "react-native",
+    "webpack"
+  ],
   "license": "MIT",
   "bin": "./bin/react-native-webpack-server.js",
   "files": [
