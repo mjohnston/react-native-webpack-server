@@ -1,6 +1,6 @@
 {
   "name": "react-native-webpack-server",
-  "version": "0.3.0",
+  "version": "0.4.0-rc",
   "description": "Build React Native apps with Webpack",
   "main": "lib/Server.js",
   "author": {
@@ -30,7 +30,7 @@
   ],
   "peerDependencies": {
     "react-hot-loader": ">=1.2.4",
-    "react-native": ">=0.4.3 <0.5.0 || >=0.6.0",
+    "react-native": ">=0.11.0-rc",
     "webpack": ">=1.8.4",
     "webpack-dev-server": ">=1.8.0"
   },
