@@ -30,6 +30,7 @@
   ],
   "peerDependencies": {
     "react-hot-loader": ">=1.2.4",
+    "react-native": ">=0.4.3 <0.5.0 || >=0.6.0",
     "webpack": ">=1.8.4",
     "webpack-dev-server": ">=1.8.0"
   },
@@ -38,8 +39,5 @@
     "connect": "^3.3.5",
     "source-map": "^0.4.2",
     "nomnom": "^1.8.1"
-  },
-  "devDependencies": {
-    "react-native": "*"
   }
 }
