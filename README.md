@@ -24,7 +24,7 @@ Start the React Native Webpack Server using the included script. You might want 
 
 ```js
 "scripts": {
-  "start": "./node_modules/.bin/react-native-webpack-server start"
+  "start": "react-native-webpack-server start"
 }
 ```
 
