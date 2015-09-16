@@ -29,7 +29,6 @@
     "README.md"
   ],
   "peerDependencies": {
-    "react-hot-loader": ">=1.2.4",
     "react-native": ">=0.11.0",
     "webpack": ">=1.8.4",
     "webpack-dev-server": ">=1.8.0"
