@@ -9,7 +9,7 @@ const {
   WebView,
 } = React;
 
-const BASE_URL = 'http://facebook.github.io/react-native/docs/';
+const BASE_URL = 'https://facebook.github.io/react-native/docs/';
 
 export default class DocSection extends React.Component {
 
