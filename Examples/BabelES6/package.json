@@ -1,6 +1,6 @@
 {
   "name": "BabelES6",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "react-native-webpack-server start",
@@ -12,8 +12,8 @@
     "babel-loader": "^5.0.0",
     "react": "^0.13.1",
     "react-hot-loader": "^1.2.4",
-    "react-native": ">=0.11.0",
-    "react-native-webpack-server": "^0.3.0",
+    "react-native": "^0.11.0",
+    "react-native-webpack-server": "^0.4.0",
     "webpack": "^1.8.4",
     "webpack-dev-server": "^1.8.0"
   }
