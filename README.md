@@ -2,8 +2,6 @@
 
 React Native Webpack Server is a development server that leverages the [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) and the [React Packager](https://github.com/facebook/react-native/tree/master/packager) to enable building React Native JavaScript bundles with webpack. This allows you to use the existing webpack ecosystem when targeting React Native.
 
-**If your project depends on react-native < 0.4.3 you will need to lock down the version of this package to 0.1.x.**
-
 ## Installing
 
 ```
