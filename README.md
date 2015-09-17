@@ -2,8 +2,6 @@
 
 React Native Webpack Server is a development server that leverages the [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) and the [React Packager](https://github.com/facebook/react-native/tree/master/packager) to enable building React Native JavaScript bundles with webpack. This allows you to use the existing webpack ecosystem when targeting React Native.
 
-**If your project depends on react-native < 0.4.3 you will need to lock down the version of this package to 0.1.x.**
-
 ## Installing
 
 ```
@@ -48,13 +46,11 @@ React Native Webpack Server enables source maps by generating the react-native a
 
 ## Hot Reload
 
-Since this is built on Webpack you can now leverage the growing ecosystem of addons such as [React Hot Loader](https://github.com/gaearon/react-hot-loader).
+Since this is built on Webpack you can now leverage the growing ecosystem of addons such as React hot module replacement via [react-transform-webpack-hmr](https://github.com/gaearon/react-transform-webpack-hmr).
 
-To enable hot reload, make sure you first install the `react-hot-loader` package and then start the server with `--hot=1`.
+To enable hot reload, make sure you first install [babel-plugin-react-transform](https://github.com/gaearon/babel-plugin-react-transform) and [react-transform-webpack-hmr](https://github.com/gaearon/react-transform-webpack-hmr), then start the server with `--hot`.
 
 You'll also need to configure Webpack. See the [Babel+ES6 config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js) for an example.
-
-The examples in this repo use a relative path `../../` to link to react-native-webpack-server. You'll need to replace these with the node.js module path: `react-native-webpack-server`. The 2 places you will see this are in `package.json` scripts and `webpack.config.js` hot loader entry.
 
 **NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator) or the WebView executor (CMD+CTRL+Z -> Enable Safari Debugging). If you regurlarly use this feature, you might want to default to the web socket exeuctor in development:
 
