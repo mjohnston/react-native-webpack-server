@@ -12,16 +12,15 @@ getTransformMatrix = (rotation) ->
   m2 = mat4.rotateZ m2, m1, rotation
   [].slice.apply m2
 
-class App extends React.Component
+App = React.createClass
 
-  constructor: (props) ->
-    super props
-    @state = {rotation: 0}
+  getInitialState: () ->
+    {rotation: 0}
 
   componentDidMount: ->
     do @onTick
 
-  onTick: =>
+  onTick: ->
     inc = 1
     degrees = radiansToDegrees(@state.rotation) - inc
     rotation = degressToRadians degrees
