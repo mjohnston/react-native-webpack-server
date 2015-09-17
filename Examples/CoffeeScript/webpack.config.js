@@ -38,8 +38,22 @@ if (process.env.HOT) {
   config.entry['index.ios'].unshift('webpack/hot/only-dev-server');
   config.entry['index.ios'].unshift('webpack-dev-server/client?http://localhost:8082');
   config.output.publicPath = 'http://localhost:8082/';
-  config.module.loaders[0].loaders.unshift('react-hot');
   config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+  config.module.loaders.unshift({
+    test: /\.coffee$/,
+    exclude: /node_modules/,
+    loader: 'babel',
+    query: {
+      plugins: ['react-transform'],
+      extra: {
+        'react-transform': [{
+          target: 'react-transform-webpack-hmr',
+          imports: ['react-native'],
+          locals: ['module']
+        }]
+      }
+    }
+  });
 }
 
 // Production config

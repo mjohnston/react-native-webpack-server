@@ -18,9 +18,15 @@ var config = {
   },
 
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel?stage=0&blacklist=validation.react']},
-    ],
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        stage: 0,
+        plugins: []
+      }
+    }]
   },
 
   plugins: [],
@@ -34,8 +40,15 @@ if (process.env.HOT) {
   config.entry['index.ios'].unshift('webpack/hot/only-dev-server');
   config.entry['index.ios'].unshift('webpack-dev-server/client?http://localhost:8082');
   config.output.publicPath = 'http://localhost:8082/';
-  config.module.loaders[0].loaders.unshift('react-hot');
   config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+  config.module.loaders[0].query.plugins.push('react-transform');
+  config.module.loaders[0].query.extra = {
+    'react-transform': [{
+      target: 'react-transform-webpack-hmr',
+      imports: ['react-native'],
+      locals: ['module']
+    }]
+  };
 }
 
 // Production config
