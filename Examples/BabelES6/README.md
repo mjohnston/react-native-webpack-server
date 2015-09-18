@@ -1,7 +1,5 @@
 ## Running the example app
 
-First run `npm install` from the root of this repository (this is needed since the examples reference react-native-webpack-server locally).
-
 Install the example app dependencies and start the server:
 
 ```
@@ -22,11 +20,7 @@ Hot reload only works with the web socket executor (hit CMD+D in the simulator) 
 To build for release:
 
 ```
-NODE_ENV=production npm start
-```
-
-```
-curl 'http://localhost:8080/index.ios.bundle?dev=false&minify=true' -o iOS/main.jsbundle
+npm run bundle
 ```
 
 Then uncomment the line in AppDelegate.m that loads the local `main.jsbundle`.

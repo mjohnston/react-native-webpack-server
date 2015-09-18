@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "react-native-webpack-server start",
-    "hot": "HOT=1 react-native-webpack-server start --hot"
+    "hot": "HOT=1 react-native-webpack-server start --hot",
+    "bundle": "react-native-webpack-server bundle"
   },
   "dependencies": {
     "babel": "^5.1.4",

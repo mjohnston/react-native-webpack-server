@@ -4,7 +4,7 @@ React Native Webpack Server is a development server that leverages the [Webpack 
 
 ## Installing
 
-```
+```shell
 npm install --save-dev react-native-webpack-server
 ```
 
@@ -22,6 +22,7 @@ Start the React Native Webpack Server using the included script. You might want 
 
 ```js
 "scripts": {
+  "bundle": "react-native-webpack-server bundle"
   "start": "react-native-webpack-server start"
 }
 ```
@@ -34,8 +35,19 @@ jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"]
 
 To run the development server:
 
-```
+```shell
 npm start
+```
+
+### Bundling for distribution
+
+Similar to the [standard React Native packager](https://facebook.github.io/react-native/docs/running-on-device-ios.html#using-offline-bundle), you can generate an offline JS bundle to use your app without a development server:
+
+```shell
+react-native-webpack-server bundle
+
+# OR, using the above package.json script:
+npm run bundle
 ```
 
 ## Source Maps
@@ -76,7 +88,7 @@ In your webpack config, you will likely want to enable the `UglifyJsPlugin`. The
 
 To generate and copy the minified bundle into the iOS project:
 
-```
+```shell
 curl 'http://localhost:8080/index.ios.bundle?dev=false&minify=true' -o iOS/main.jsbundle
 ```
 
