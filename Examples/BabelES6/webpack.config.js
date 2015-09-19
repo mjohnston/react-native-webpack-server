@@ -44,7 +44,7 @@ if (process.env.HOT) {
   config.module.loaders[0].query.plugins.push('react-transform');
   config.module.loaders[0].query.extra = {
     'react-transform': [{
-      target: 'react-transform-webpack-hmr',
+      target: 'react-transform-hmr',
       imports: ['react-native'],
       locals: ['module']
     }]

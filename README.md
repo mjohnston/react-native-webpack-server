@@ -60,9 +60,9 @@ React Native Webpack Server enables source maps by generating the react-native a
 
 ## Hot Reload
 
-Since this is built on Webpack you can now leverage the growing ecosystem of addons such as React hot module replacement via [react-transform-webpack-hmr](https://github.com/gaearon/react-transform-webpack-hmr).
+Since this is built on Webpack you can now leverage the growing ecosystem of addons such as React hot module replacement via [react-transform-hmr](https://github.com/gaearon/react-transform-hmr).
 
-To enable hot reload, make sure you first install [babel-plugin-react-transform](https://github.com/gaearon/babel-plugin-react-transform) and [react-transform-webpack-hmr](https://github.com/gaearon/react-transform-webpack-hmr), then start the server with `--hot`.
+To enable hot reload, make sure you first install [babel-plugin-react-transform](https://github.com/gaearon/babel-plugin-react-transform) and [react-transform-hmr](https://github.com/gaearon/react-transform-hmr), then start the server with `--hot`.
 
 You'll also need to configure Webpack. See the [Babel+ES6 config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js) for an example.
 
