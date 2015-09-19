@@ -47,7 +47,7 @@ if (process.env.HOT) {
       plugins: ['react-transform'],
       extra: {
         'react-transform': [{
-          target: 'react-transform-webpack-hmr',
+          target: 'react-transform-hmr',
           imports: ['react-native'],
           locals: ['module']
         }]
