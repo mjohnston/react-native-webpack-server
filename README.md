@@ -41,6 +41,8 @@ To run the development server:
 npm start
 ```
 
+Checkkout some of the [Examples](/Examples) to get started.
+
 ### Bundling for distribution
 
 Similar to the [standard React Native packager](https://facebook.github.io/react-native/docs/running-on-device-ios.html#using-offline-bundle), you can generate an offline JS bundle to use your app without a development server:
