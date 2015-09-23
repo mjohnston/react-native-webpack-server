@@ -41,7 +41,7 @@ To run the development server:
 npm start
 ```
 
-Checkkout some of the [Examples](/Examples) to get started.
+Checkout some of the [Examples](/Examples) to get started.
 
 ### Bundling for distribution
 
