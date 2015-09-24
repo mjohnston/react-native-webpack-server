@@ -43,11 +43,13 @@ if (process.env.HOT) {
   config.plugins.unshift(new webpack.HotModuleReplacementPlugin());
   config.module.loaders[0].query.plugins.push('react-transform');
   config.module.loaders[0].query.extra = {
-    'react-transform': [{
-      target: 'react-transform-hmr',
-      imports: ['react-native'],
-      locals: ['module']
-    }]
+    'react-transform': {
+      transforms: [{
+        transform: 'react-transform-hmr',
+        imports: ['react-native'],
+        locals: ['module']
+      }]
+    }
   };
 }
 

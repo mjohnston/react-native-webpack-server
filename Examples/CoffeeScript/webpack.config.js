@@ -46,11 +46,13 @@ if (process.env.HOT) {
     query: {
       plugins: ['react-transform'],
       extra: {
-        'react-transform': [{
-          target: 'react-transform-hmr',
-          imports: ['react-native'],
-          locals: ['module']
-        }]
+        'react-transform': {
+          transforms: [{
+            transform: 'react-transform-hmr',
+            imports: ['react-native'],
+            locals: ['module']
+          }]
+        }
       }
     }
   });
