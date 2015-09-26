@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var path = require('path');
-var fs = require('fs');
-var parser = require('nomnom');
-var Server = require('../lib/Server');
-var fetch = require('../lib/fetch');
+const path = require('path');
+const fs = require('fs');
+const parser = require('nomnom');
+const Server = require('../lib/Server');
+const fetch = require('../lib/fetch');
 
 function commonOptions (command) {
   return command.option('hostname', {
@@ -27,7 +27,7 @@ function commonOptions (command) {
   });
 }
 
-function startServer(opts) {
+function createServer(opts) {
   opts.webpackConfigPath = path.resolve(process.cwd(), opts.webpackConfigPath);
   if (fs.existsSync(opts.webpackConfigPath)) {
     opts.webpackConfig = require(path.resolve(process.cwd(), opts.webpackConfigPath));
@@ -37,25 +37,25 @@ function startServer(opts) {
   }
   delete opts.webpackConfigPath;
 
-  var server = new Server(opts);
+  const server = new Server(opts);
   return server;
 }
 
-commonOptions(parser.command('start')
+commonOptions(parser.command('start'))
   .option('hot', {
     flag: true,
     default: false,
-  }))
+  })
   .callback(function(opts) {
-    var server = startServer(opts);
+    const server = createServer(opts);
     server.start();
   });
 
 commonOptions(parser.command('bundle'))
   .callback(function(opts) {
-    var server = startServer(opts);
-    var url = 'http://localhost:' + opts.port + '/index.ios.bundle';
-    var targetPath = path.resolve('./iOS/main.jsbundle');
+    const server = createServer(opts);
+    const url = 'http://localhost:' + opts.port + '/index.ios.bundle';
+    const targetPath = path.resolve('./iOS/main.jsbundle');
 
     server.start();
 
