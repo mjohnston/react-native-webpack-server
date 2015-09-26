@@ -28,6 +28,10 @@
     "LICENSE",
     "README.md"
   ],
+  "scripts": {
+    "lint": "eslint bin hot lib",
+    "test": "npm run lint"
+  },
   "engines": {
     "node": "^4.0.0",
     "iojs": ">=2.0.0"
@@ -43,5 +47,8 @@
     "nomnom": "^1.8.1",
     "socket-retry-connect": "0.0.1",
     "source-map": "^0.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^1.5.1"
   }
 }
