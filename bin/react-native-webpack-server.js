@@ -33,7 +33,6 @@ function createServer(opts) {
     opts.webpackConfig = require(path.resolve(process.cwd(), opts.webpackConfigPath));
   } else {
     throw new Error('Must specify webpackConfigPath or create ./webpack.config.js');
-    process.exit(1);
   }
   delete opts.webpackConfigPath;
 
