@@ -28,6 +28,10 @@
     "LICENSE",
     "README.md"
   ],
+  "engines": {
+    "node": "^4.0.0",
+    "iojs": ">=2.0.0"
+  },
   "peerDependencies": {
     "react-native": ">=0.11.0",
     "webpack": ">=1.8.4",
@@ -36,8 +40,8 @@
   "dependencies": {
     "bluebird": "^2.9.24",
     "connect": "^3.3.5",
-    "source-map": "^0.4.2",
     "nomnom": "^1.8.1",
-    "socket-retry-connect": "0.0.1"
+    "socket-retry-connect": "0.0.1",
+    "source-map": "^0.4.2"
   }
 }
