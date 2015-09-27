@@ -20,7 +20,10 @@
     "webpack"
   ],
   "license": "MIT",
-  "bin": "./bin/react-native-webpack-server.js",
+  "bin": {
+    "rnws": "./bin/rnws.js",
+    "react-native-webpack-server": "./bin/rnws.js"
+  },
   "files": [
     "bin",
     "hot",
