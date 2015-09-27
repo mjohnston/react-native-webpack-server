@@ -113,3 +113,8 @@ It's a terrible hack to jump back onto the React Native runloop when a module is
 **Source map generation is really slow on io.js.**
 
 On a late-2012 Macbook Pro, it takes about 1.5 seconds to generate the source map for react-native on io.js. On stable node (0.12.x) it takes around 200ms. I originally thought this was an issue with [source-map](https://github.com/mozilla/source-map) but in an isolated test with the entirety of react-native I found io.js and node.js (stable) to be about the same. If you have any ideas, please let me know. In the meantime, it's best to use the latest stable version of node.js.
+
+**My `.babelrc` configuration is not working**
+
+The react-native packager will [cache its babel configuration](https://github.com/facebook/react-native/issues/1924), causing any subsequent changes to `.babelrc` to have no effect. [React native 0.12 includes an option to reset the cache](https://github.com/facebook/react-native/commit/59b9dc8829377e9b8a048669bde8fd737c6166f1), but until it lands, simply configure babel inside your webpack configuration, e.g. [BabelES6/webpack.config.js](https://github.com/mjohnston/react-native-webpack-server/blob/bc719bee4a16ea9b773c5d8ccb8d532be8b9306b/Examples/BabelES6/webpack.config.js#L26). See also: [#63](https://github.com/mjohnston/react-native-webpack-server/issues/63), [facebook/react-native#1924](https://github.com/facebook/react-native/issues/1924)
+
