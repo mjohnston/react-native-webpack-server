@@ -24,6 +24,9 @@ function commonOptions (command) {
   })
   .option('webpackConfigPath', {
     default: 'webpack.config.js',
+  })
+  .option('bundlePath', {
+    default: 'iOS/main.jsbundle',
   });
 }
 
@@ -54,7 +57,7 @@ commonOptions(parser.command('bundle'))
   .callback(function(opts) {
     const server = createServer(opts);
     const url = 'http://localhost:' + opts.port + '/index.ios.bundle';
-    const targetPath = path.resolve('./iOS/main.jsbundle');
+    const targetPath = path.resolve(opts.bundlePath);
 
     server.start();
 
