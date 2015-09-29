@@ -72,11 +72,16 @@ commonOptions(program.command('start'))
 
 commonOptions(program.command('bundle'))
   .description('Bundle the app for distribution.')
+  .option(
+    '-b, --bundlePath [path]',
+    'Path where the bundle should be written. [./iOS/main.jsbundle]',
+    './iOS/main.jsbundle'
+  )
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
     const url = 'http://localhost:' + opts.port + '/index.ios.bundle';
-    const targetPath = path.resolve('./iOS/main.jsbundle');
+    const targetPath = path.resolve(opts.bundlePath);
 
     server.start();
 
