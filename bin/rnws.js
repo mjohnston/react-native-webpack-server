@@ -33,8 +33,8 @@ function commonOptions(program) {
       'localhost'
     )
     .option(
-      '-P, --port [port]', 
-      'Port on which the server will listen. [8080]', 
+      '-P, --port [port]',
+      'Port on which the server will listen. [8080]',
       8080
     )
     .option(
@@ -43,13 +43,13 @@ function commonOptions(program) {
       8081
     )
     .option(
-      '-w, --webpackPort [port]', 
-      'Port on which the webpack dev server will listen. [8082]', 
+      '-w, --webpackPort [port]',
+      'Port on which the webpack dev server will listen. [8082]',
       8082
     )
     .option(
-      '-c, --webpackConfigPath [path]', 
-      'Path to the webpack configuration file. [webpack.config.js]', 
+      '-c, --webpackConfigPath [path]',
+      'Path to the webpack configuration file. [webpack.config.js]',
       'webpack.config.js'
     )
     .option(
@@ -58,7 +58,7 @@ function commonOptions(program) {
       'index.ios'
     );
 }
-  
+
 program.version(package.version);
 
 commonOptions(program.command('start'))
@@ -77,10 +77,16 @@ commonOptions(program.command('bundle'))
     'Path where the bundle should be written. [./iOS/main.jsbundle]',
     './iOS/main.jsbundle'
   )
+  .option(
+    '--no-optimize',
+    'Whether the bundle should skip optimization. [false]',
+    false
+  )
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
-    const url = 'http://localhost:' + opts.port + '/index.ios.bundle';
+    const query = (opts.optimize) ? '?dev=false&minify=true' : '';
+    const url = 'http://localhost:' + opts.port + '/index.ios.bundle' + query;
     const targetPath = path.resolve(opts.bundlePath);
 
     server.start();
