@@ -3,11 +3,25 @@
     "es6": true,
     "node": true
   },
+  "ecmaFeatures": {
+    "binaryLiterals": true,
+    "blockBindings": true,
+    "classes": true,
+    "generators": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "octalLiterals": true,
+    "templateStrings": true,
+    "unicodeCodePointEscapes": true
+  },
   "extends": "eslint:recommended",
   "rules": {
     "comma-dangle": [2, "always-multiline"],
+    "eol-last": 2,
     "indent": [2, 2],
     "no-console": 0,
+    "no-trailing-spaces": 2,
     "quotes": [2, "single"],
     "semi": [2, "always"]
   }
