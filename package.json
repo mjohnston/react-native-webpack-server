@@ -47,7 +47,7 @@
   "dependencies": {
     "bluebird": "^2.9.24",
     "commander": "^2.8.1",
-    "connect": "^3.3.5",
+    "express": "^4.13.3",
     "socket-retry-connect": "0.0.1",
     "source-map": "^0.4.2"
   },
