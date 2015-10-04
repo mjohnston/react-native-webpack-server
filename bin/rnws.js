@@ -77,10 +77,16 @@ commonOptions(program.command('bundle'))
     'Path where the bundle should be written. [./iOS/main.jsbundle]',
     './iOS/main.jsbundle'
   )
+  .option(
+    '--no-optimize',
+    'Whether the bundle should skip optimization. [false]',
+    false
+  )
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
-    const url = 'http://localhost:' + opts.port + '/index.ios.bundle';
+    const query = (opts.optimize) ? '?dev=false&minify=true' : '';
+    const url = 'http://localhost:' + opts.port + '/index.ios.bundle' + query;
     const targetPath = path.resolve(opts.bundlePath);
 
     server.start();
