@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const url = require('url');
 const program = require('commander');
 const package = require('../package.json');
 const fetch = require('../lib/fetch');
@@ -85,13 +86,19 @@ commonOptions(program.command('bundle'))
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
-    const query = (opts.optimize) ? '?dev=false&minify=true' : '';
-    const url = 'http://localhost:' + opts.port + '/index.ios.bundle' + query;
+    const query = opts.optimize ? {dev: false, minify: true} : {};
+    const bundleUrl = url.format({
+      protocol: 'http',
+      hostname: 'localhost',
+      port: opts.port,
+      pathname: 'index.ios.bundle',
+      query: query,
+    });
     const targetPath = path.resolve(opts.bundlePath);
 
     server.start();
 
-    fetch(url).then(function(content) {
+    fetch(bundleUrl).then(function(content) {
       fs.writeFileSync(targetPath, content);
       server.stop();
 
