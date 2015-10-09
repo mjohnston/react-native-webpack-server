@@ -84,7 +84,7 @@ commonOptions(program.command('bundle'))
     false
   )
   .option(
-    '--platform',
+    '--platform [platform]',
     'The platform for which to create the bundle. [ios]',
     'ios'
   )
