@@ -83,10 +83,16 @@ commonOptions(program.command('bundle'))
     'Whether the bundle should skip optimization. [false]',
     false
   )
+  .option(
+    '--platform',
+    'The platform for which to create the bundle. [ios]',
+    'ios'
+  )
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
     const query = opts.optimize ? {dev: false, minify: true} : {};
+    query.platform = opts.platform || 'ios';
     const bundleUrl = url.format({
       protocol: 'http',
       hostname: 'localhost',
