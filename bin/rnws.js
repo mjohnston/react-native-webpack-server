@@ -105,18 +105,18 @@ commonOptions(program.command('bundle'))
     });
     const targetPath = path.resolve(opts.bundlePath);
 
-    server.start();
+    server.start().then(function() {
+      fetch(bundleUrl).then(function(content) {
+        fs.writeFileSync(targetPath, content);
+        server.stop();
 
-    fetch(bundleUrl).then(function(content) {
-      fs.writeFileSync(targetPath, content);
-      server.stop();
-
-      // XXX: Hack something is keeping the process alive but we can still
-      // safely kill here without leaving processes hanging around...
-      process.exit(0);
-    }).catch(function(err) {
-      console.log('Error creating bundle...', err.stack);
-      server.stop();
+        // XXX: Hack something is keeping the process alive but we can still
+        // safely kill here without leaving processes hanging around...
+        process.exit(0);
+      }).catch(function (err) {
+        console.log('Error creating bundle...', err.stack);
+        server.stop();
+      });
     });
   });
 
