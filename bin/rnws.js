@@ -91,8 +91,11 @@ commonOptions(program.command('bundle'))
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
-    const query = opts.optimize ? {dev: false, minify: true} : {};
-    query.platform = opts.platform || 'ios';
+    const query = {
+      dev: !opts.optimize,
+      minify: opts.optimize,
+      platform: opts.platform,
+    };
     const bundleUrl = url.format({
       protocol: 'http',
       hostname: 'localhost',
