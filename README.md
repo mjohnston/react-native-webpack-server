@@ -69,7 +69,7 @@ To enable hot reload, make sure you first install [babel-plugin-react-transform]
 
 You'll also need to configure Webpack. See the [Babel+ES6 config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js) for an example.
 
-**NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator) or the WebView executor (CMD+CTRL+Z -> Enable Safari Debugging). If you regurlarly use this feature, you might want to default to the web socket exeuctor in development:
+**NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator) or the WebView executor (CMD+CTRL+Z -> Enable Safari Debugging). If you regurlarly use this feature, you might want to default to the web socket executor in development:
 
 RCTBridge.m:
 ```objc
