@@ -75,8 +75,8 @@ commonOptions(program.command('bundle'))
   .description('Bundle the app for distribution.')
   .option(
     '-b, --bundlePath [path]',
-    'Path where the bundle should be written. [./iOS/main.jsbundle]',
-    './iOS/main.jsbundle'
+    'Path where the bundle should be written. [./ios/main.jsbundle]',
+    './ios/main.jsbundle'
   )
   .option(
     '--no-optimize',
