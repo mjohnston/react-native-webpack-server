@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-  - "2"
-  - "3"
   - "4"
+env:
+  - NPM_VERSION=2
+  - NPM_VERSION=3
+before_install:
+  - npm install -g npm@$NPM_VERSION
+script:
+  - cd $TRAVIS_BUILD_DIR/Examples/BabelES6 && npm install && npm run bundle
+  - cd $TRAVIS_BUILD_DIR/Examples/CoffeeScript && npm install && npm run bundle
