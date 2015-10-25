@@ -105,17 +105,16 @@ commonOptions(program.command('bundle'))
     });
     const targetPath = path.resolve(opts.bundlePath);
 
+    // Re-throw error if bundle fails
+    process.on('unhandledRejection', function(reason) {
+      throw reason;
+    });
+
     server.start().then(function() {
       return fetch(bundleUrl);
     }).then(function(bundleSrc) {
       fs.writeFileSync(targetPath, bundleSrc);
-      server.stop();
-
-      // XXX: Hack something is keeping the process alive but we can still
-      // safely kill here without leaving processes hanging around...
-      process.exit(0);
-    }).catch(function (err) {
-      console.log('Error creating bundle...', err.stack);
+    }).finally(function() {
       server.stop();
     });
   });
