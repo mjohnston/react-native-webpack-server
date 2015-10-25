@@ -1,6 +1,6 @@
-# React Native Webpack Server
+# react-native-webpack-server
 
-React Native Webpack Server is a development server that leverages the [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) and the [React Packager](https://github.com/facebook/react-native/tree/master/packager) to enable building React Native JavaScript bundles with webpack. This allows you to use the existing webpack ecosystem when targeting React Native.
+react-native-webpack-server is a development server that leverages the [Webpack Dev Server](https://github.com/webpack/webpack-dev-server) and the [React Packager](https://github.com/facebook/react-native/tree/master/packager) to enable building React Native JavaScript bundles with webpack. This allows you to use the existing webpack ecosystem when targeting React Native.
 
 [![react-native-webpack channel on slack](https://img.shields.io/badge/discord-%23react--native--webpack%20%40%20reactiflux-61dafb.svg?style=flat-square)](http://www.reactiflux.com)
 [![Build Status](https://travis-ci.org/mjohnston/react-native-webpack-server.svg)](https://travis-ci.org/mjohnston/react-native-webpack-server)
@@ -13,6 +13,16 @@ npm install --save-dev react-native-webpack-server
 
 ## Using
 
+Use `--help` for all CLI options:
+
+```shell
+node_modules/.bin/rnws --help
+node_modules/.bin/rnws start --help
+node_modules/.bin/rnws bundle --help
+```
+
+### Setup
+
 By default React Native will look for an index.ios.js at the root of the project. Delete this file and add an entry in your webpack config:
 
 ```js
@@ -21,7 +31,7 @@ entry: {
 }
 ```
 
-Start the React Native Webpack Server using the included script. You might want to put this in your `package.json`.
+Start react-native-webpack-server using `rnws start`. You might want to put this in your `package.json`:
 
 ```js
 "scripts": {
@@ -44,16 +54,23 @@ npm start
 
 Checkout some of the [Examples](/Examples) to get started.
 
-### Bundling for distribution
+**Note: react-native-webpack-server supports only iOS right now; Android support is [coming soon](https://github.com/mjohnston/react-native-webpack-server/issues/65)**
 
-Similar to the [standard React Native packager](https://facebook.github.io/react-native/docs/running-on-device-ios.html#using-offline-bundle), you can generate an offline JS bundle to use your app without a development server:
+### Bundling for release
+
+When you are ready to ship your app, you will want to generate a minified bundle and package it in the binary. Similar to the [React Native packager](https://facebook.github.io/react-native/docs/running-on-device-ios.html#using-offline-bundle), you can generate an offline JS bundle to use your app without a development server:
 
 ```shell
 rnws bundle
-
-# OR, using the above package.json script:
-npm run bundle
 ```
+
+For all options, see:
+
+```shell
+rnws bundle --help
+```
+
+In your webpack config, you will likely want to enable the `UglifyJsPlugin`. The sample apps are configured to enable minification when `process.env.NODE_ENV` is set to `production`. See the [BabelES6 webpack config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js#L41) for an example.
 
 ## Source Maps
 
@@ -61,7 +78,9 @@ Current solutions for building React Native bundles with Webpack lose source map
 
 React Native Webpack Server enables source maps by generating the react-native and application bundles separately and then combining their source maps.
 
-## Hot Reload
+## Hot Module Replacement
+
+**Note: HMR currently does not work using React Native >=0.12. See [#103](https://github.com/mjohnston/react-native-webpack-server/issues/103) for a temporary workaround.**
 
 Since this is built on Webpack you can now leverage the growing ecosystem of addons such as React hot module replacement via [react-transform-hmr](https://github.com/gaearon/react-transform-hmr).
 
@@ -69,7 +88,7 @@ To enable hot reload, make sure you first install [babel-plugin-react-transform]
 
 You'll also need to configure Webpack. See the [Babel+ES6 config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js) for an example.
 
-**NOTE:** hot reload currently only works with the web socket executor (hit CMD+D in the simulator) or the WebView executor (CMD+CTRL+Z -> Enable Safari Debugging). If you regurlarly use this feature, you might want to default to the web socket executor in development:
+**NOTE:** hot reload currently only works with the Chrome web socket executor (hit CMD+D in the simulator). If you regurlarly use this feature, you might want to default to the web socket executor in development:
 
 RCTBridge.m:
 ```objc
@@ -82,22 +101,6 @@ RCTBridge.m:
   ...
   }
 ```
-
-Replace `RCTWebSocketExecutor` with `RCTWebViewExecutor` if you wish to use the Safari WebKit inspector instead of the Chrome dev tools.
-
-## Packaging for release
-
-When you are ready to ship your app, you will want to generate a minified bundle and package it in the binary. You can build a minified bundle using the `dev` and `minify` URL parameters. Setting these to `false` or `0` will tell the React Native packager to minify and remove debug code.
-
-In your webpack config, you will likely want to enable the `UglifyJsPlugin`. The sample apps are configured to enable minification when `process.env.NODE_ENV` is set to `production`. See the [BabelES6 webpack config](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/webpack.config.js#L41) for an example.
-
-To generate and copy the minified bundle into the iOS project:
-
-```shell
-curl 'http://localhost:8080/index.ios.bundle?dev=false&minify=true' -o iOS/main.jsbundle
-```
-
-You will need to uncomment [this line](https://github.com/mjohnston/react-native-webpack-server/blob/master/Examples/BabelES6/iOS/AppDelegate.m#L37) in `AppDelegate.m` in order to load the local bundle.
 
 ## FAQ
 
@@ -119,5 +122,10 @@ On a late-2012 Macbook Pro, it takes about 1.5 seconds to generate the source ma
 
 **My `.babelrc` configuration is not working**
 
-The react-native packager will [cache its babel configuration](https://github.com/facebook/react-native/issues/1924), causing any subsequent changes to `.babelrc` to have no effect. [React native 0.12 includes an option to reset the cache](https://github.com/facebook/react-native/commit/59b9dc8829377e9b8a048669bde8fd737c6166f1), but until it lands, simply configure babel inside your webpack configuration, e.g. [BabelES6/webpack.config.js](https://github.com/mjohnston/react-native-webpack-server/blob/bc719bee4a16ea9b773c5d8ccb8d532be8b9306b/Examples/BabelES6/webpack.config.js#L26). See also: [#63](https://github.com/mjohnston/react-native-webpack-server/issues/63), [facebook/react-native#1924](https://github.com/facebook/react-native/issues/1924)
+The react-native packager will [cache its babel configuration](https://github.com/facebook/react-native/issues/1924), causing any subsequent changes to `.babelrc` to have no effect. Try using the `--resetCache` option to clear the RN packager cache:
 
+```shell
+rnws start --resetCache
+```
+
+See also: [#63](https://github.com/mjohnston/react-native-webpack-server/issues/63), [facebook/react-native#1924](https://github.com/facebook/react-native/issues/1924)
