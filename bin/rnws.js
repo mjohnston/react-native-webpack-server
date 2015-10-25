@@ -57,6 +57,11 @@ function commonOptions(program) {
       '-e, --entry [name]',
       'Webpack entry module. [index.ios]',
       'index.ios'
+    )
+    .option(
+      '-r, --resetCache',
+      'Remove cached react-native packager files [false]',
+      false
     );
 }
 
