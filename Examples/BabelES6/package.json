@@ -15,6 +15,7 @@
     "react-native": "^0.13.2",
     "react-native-webpack-server": "file:../..",
     "react-transform-hmr": "^1.0.1",
-    "webpack": "elliottsj/webpack#web-worker-hmr"
+    "webpack": "elliottsj/webpack#web-worker-hmr",
+    "webpack-hot-middleware": "2.4.1"
   }
 }
