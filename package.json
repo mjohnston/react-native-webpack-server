@@ -48,6 +48,7 @@
     "bluebird": "^2.9.24",
     "commander": "^2.8.1",
     "express": "^4.13.3",
+    "mkdirp": "^0.5.1",
     "socket-retry-connect": "0.0.1",
     "source-map": "^0.5.1"
   },
