@@ -2,6 +2,7 @@
 
 import React from 'react-native';
 import DocSection from './DocSection';
+import docs from '../data/docs';
 
 const {
   ListView,
@@ -15,21 +16,21 @@ const {
 export default class DocIndex extends React.Component {
 
   static propTypes = {
-    docs: React.PropTypes.object.isRequired,
+    navigator: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    const sectionIDs = Object.keys(props.docs);
-    const rowIDs = sectionIDs.map(id => props.docs[id].sections.map(s => s.id));
+    const sectionIDs = Object.keys(docs);
+    const rowIDs = sectionIDs.map(id => docs[id].sections.map(s => s.id));
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
       getSectionHeaderData: (docs, sectionID) => docs[sectionID],
       getRowData: (docs, sectionID, rowID) =>
         docs[sectionID].sections.filter(s => s.id === rowID)[0]
-    }).cloneWithRowsAndSections(props.docs, sectionIDs, rowIDs);
+    }).cloneWithRowsAndSections(docs, sectionIDs, rowIDs);
 
     this.state = {dataSource};
   }

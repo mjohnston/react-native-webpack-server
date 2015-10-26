@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
@@ -10,6 +12,7 @@ var config = {
 
   entry: {
     'index.ios': ['./src/main.js'],
+    'index.android': ['./src/main.js'],
   },
 
   output: {
@@ -20,7 +23,10 @@ var config = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      include: [
+        path.resolve(__dirname, 'src'),
+        path.resolve(__dirname, 'node_modules/react-native-navbar'),
+      ],
       loader: 'babel',
       query: {
         stage: 0,
