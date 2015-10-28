@@ -10,6 +10,7 @@ var config = {
 
   entry: {
     'index.ios': ['./src/main.coffee'],
+    'index.android': ['./src/main.coffee'],
   },
 
   output: {
