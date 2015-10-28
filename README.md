@@ -23,11 +23,12 @@ node_modules/.bin/rnws bundle --help
 
 ### Setup
 
-By default React Native will look for an index.ios.js at the root of the project. Delete this file and add an entry in your webpack config:
+By default React Native will look for **index.ios.js**/**index.android.js** at the root of the project. Delete these files and add entries in your webpack config:
 
 ```js
 entry: {
-  'index.ios': ['./src/main.js']
+  'index.ios': ['./src/main.js'],
+  'index.android': ['./src/main.js']
 }
 ```
 
@@ -40,21 +41,21 @@ Start react-native-webpack-server using `rnws start`. You might want to put this
 }
 ```
 
-This will start the server on port 8080. The last step is to change the URL of your application bundle in `AppDelegate.m`, changing 8081 to 8080:
+This will start the server on port 8080.
+
+On iOS, change the URL of your application bundle in `AppDelegate.m`, changing 8081 to 8080:
 
 ```objc
 jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];
 ```
 
-To run the development server:
+On Android, start your emulator or connect your device and run `adb reverse tcp:8081 tcp:8080`. This causes the device to connect to RNWS on port 8080 when it tries to download to <http://localhost:8081/index.android.bundle?platform=android>. Ensure that you also set _Dev Settings_ -> _Debug server host for device_ to "localhost":
 
-```shell
-npm start
-```
+<img width="400" alt="screenshot 2015-10-27 22 49 42" src="https://cloud.githubusercontent.com/assets/2177366/10778764/62bf9f80-7cff-11e5-8710-c2e9039f0350.png">
+
+**Note: No debugger or hot module replacement support is available yet for Android.**
 
 Checkout some of the [Examples](/Examples) to get started.
-
-**Note: react-native-webpack-server supports only iOS right now; Android support is [coming soon](https://github.com/mjohnston/react-native-webpack-server/issues/65)**
 
 ### Bundling for release
 
