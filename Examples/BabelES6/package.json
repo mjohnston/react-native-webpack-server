@@ -1,11 +1,12 @@
 {
   "name": "BabelES6",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "react-native-webpack-server start",
-    "hot": "HOT=1 react-native-webpack-server start --hot",
-    "bundle": "react-native-webpack-server bundle"
+    "android-setup-port": "adb reverse tcp:8081 tcp:8080",
+    "bundle": "rnws bundle",
+    "hot": "HOT=1 rnws start --hot",
+    "start": "rnws start"
   },
   "dependencies": {
     "babel": "^5.8.23",

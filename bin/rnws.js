@@ -2,11 +2,17 @@
 
 const path = require('path');
 const fs = require('fs');
-const url = require('url');
 const program = require('commander');
-const package = require('../package.json');
-const fetch = require('../lib/fetch');
+const packageJson = require('../package.json');
+const createBundle = require('../lib/createBundle');
 const Server = require('../lib/Server');
+
+/**
+ * Create a new array with falsey values removed
+ * @param  {Array} arr An array
+ * @return {Array}     The array with falsey values removed
+ */
+const compact = arr => arr.filter(Boolean);
 
 /**
  * Create a server instance using the provided options.
@@ -26,6 +32,11 @@ function createServer(opts) {
   return server;
 }
 
+/**
+ * Apply a set of common options to the commander.js program.
+ * @param  {Object} program The commander.js program
+ * @return {Object}         The program with options applied
+ */
 function commonOptions(program) {
   return program
     .option(
@@ -54,8 +65,23 @@ function commonOptions(program) {
       'webpack.config.js'
     )
     .option(
-      '-e, --entry [name]',
-      'Webpack entry module. [index.ios]',
+      '--no-android',
+      'Disable support for Android. [false]',
+      false
+    )
+    .option(
+      '--no-ios',
+      'Disable support for iOS. [false]',
+      false
+    )
+    .option(
+      '-A, --androidEntry [name]',
+      'Android entry module name. Has no effect if \'--no-android\' is passed. [index.android]',
+      'index.android'
+    )
+    .option(
+      '-I, --iosEntry [name]',
+      'iOS entry module name. Has no effect if \'--no-ios\' is passed. [index.ios]',
       'index.ios'
     )
     .option(
@@ -64,8 +90,6 @@ function commonOptions(program) {
       false
     );
 }
-
-program.version(package.version);
 
 commonOptions(program.command('start'))
   .description('Start the webpack server.')
@@ -79,8 +103,13 @@ commonOptions(program.command('start'))
 commonOptions(program.command('bundle'))
   .description('Bundle the app for distribution.')
   .option(
-    '-b, --bundlePath [path]',
-    'Path where the bundle should be written. [./ios/main.jsbundle]',
+    '--androidBundlePath [path]',
+    'Path where the Android bundle should be written. [./android/app/src/main/assets/index.android.bundle]',
+    './android/app/src/main/assets/index.android.bundle'
+  )
+  .option(
+    '--iosBundlePath [path]',
+    'Path where the iOS bundle should be written. [./ios/main.jsbundle]',
     './ios/main.jsbundle'
   )
   .option(
@@ -88,40 +117,31 @@ commonOptions(program.command('bundle'))
     'Whether the bundle should skip optimization. [false]',
     false
   )
-  .option(
-    '--platform [platform]',
-    'The platform for which to create the bundle. [ios]',
-    'ios'
-  )
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
-    const query = {
-      dev: !opts.optimize,
-      minify: opts.optimize,
-      platform: opts.platform,
-    };
-    const bundleUrl = url.format({
-      protocol: 'http',
-      hostname: 'localhost',
-      port: opts.port,
-      pathname: 'index.ios.bundle',
-      query: query,
-    });
-    const targetPath = path.resolve(opts.bundlePath);
 
-    // Re-throw error if bundle fails
-    process.on('unhandledRejection', function(reason) {
-      throw reason;
-    });
+    const doBundle = () => Promise.all(compact([
+      opts.android && createBundle(server, {
+        platform: 'android',
+        targetPath: opts.androidBundlePath,
+        dev: !opts.optimize,
+        minify: opts.optimize,
+      }),
+      opts.ios && createBundle(server, {
+        platform: 'ios',
+        targetPath: opts.iosBundlePath,
+        dev: !opts.optimize,
+        minify: opts.optimize,
+      }),
+    ]));
 
-    server.start().then(function() {
-      return fetch(bundleUrl);
-    }).then(function(bundleSrc) {
-      fs.writeFileSync(targetPath, bundleSrc);
-    }).finally(function() {
-      server.stop();
-    });
+    server.start()
+      .then(doBundle)
+      .finally(() => {
+        server.stop();
+      });
   });
 
+program.version(packageJson.version);
 program.parse(process.argv);
