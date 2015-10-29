@@ -23,7 +23,7 @@ node_modules/.bin/rnws bundle --help
 
 ### Setup
 
-By default React Native will look for **index.ios.js**/**index.android.js** at the root of the project. Delete these files and add entries in your webpack config:
+By default React Native will look for **index.ios.js** and **index.android.js** at the root of the project. Delete these files and add entries in your webpack config:
 
 ```js
 entry: {
