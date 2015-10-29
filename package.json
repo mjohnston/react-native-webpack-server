@@ -36,11 +36,10 @@
     "test": "npm run lint"
   },
   "engines": {
-    "node": "^4.0.0",
-    "iojs": ">=2.0.0"
+    "node": "^4.0.0"
   },
   "peerDependencies": {
-    "react-native": ">=0.11.0",
+    "react-native": ">=0.13.0",
     "webpack": ">=1.8.4",
     "webpack-dev-server": ">=1.8.0"
   },
