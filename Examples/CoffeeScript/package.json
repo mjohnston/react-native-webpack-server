@@ -9,16 +9,16 @@
     "start": "rnws start"
   },
   "dependencies": {
-    "babel-core": "^5.8.25",
+    "babel-core": "^5.8.32",
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.1.1",
     "cjsx-loader": "^2.0.1",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
-    "react-native": "^0.12.0",
+    "react-native": "^0.13.2",
     "react-native-webpack-server": "file:../..",
     "react-transform-hmr": "^1.0.1",
     "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.0"
+    "webpack-dev-server": "^1.12.1"
   }
 }
