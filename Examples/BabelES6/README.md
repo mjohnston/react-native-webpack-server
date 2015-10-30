@@ -16,6 +16,8 @@ npm run android-setup-port
 react-native run-android
 ```
 
+**NOTE**: In order to be able to run android-setup-port you need to run Android 5.0 since adb reverse was introduced at Android 5.0
+
 To run with hot reload (iOS-only):
 
 ```
