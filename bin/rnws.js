@@ -117,6 +117,11 @@ commonOptions(program.command('bundle'))
     'Whether the bundle should skip optimization. [false]',
     false
   )
+  .option(
+    '-s, --sourceMap',
+    'Whether a source map should be generated (along side the bundle). [false]',
+    false
+  )
   .action(function(options) {
     const opts = options.opts();
     const server = createServer(opts);
@@ -127,12 +132,14 @@ commonOptions(program.command('bundle'))
         targetPath: opts.androidBundlePath,
         dev: !opts.optimize,
         minify: opts.optimize,
+        sourceMap: opts.sourceMap,
       }),
       opts.ios && createBundle(server, {
         platform: 'ios',
         targetPath: opts.iosBundlePath,
         dev: !opts.optimize,
         minify: opts.optimize,
+        sourceMap: opts.sourceMap,
       }),
     ]));
 
