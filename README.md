@@ -46,7 +46,7 @@ This will start the server on port 8080.
 On iOS, change the URL of your application bundle in `AppDelegate.m`, changing 8081 to 8080:
 
 ```objc
-jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];
+jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle?platform=ios"];
 ```
 
 On Android, start your emulator or connect your device and run `adb reverse tcp:8081 tcp:8080`. This causes the device to connect to RNWS on port 8080 when it tries to download to <http://localhost:8081/index.android.bundle?platform=android>. Ensure that you also set _Dev Settings_ -> _Debug server host for device_ to "localhost":
