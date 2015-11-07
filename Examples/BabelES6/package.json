@@ -12,7 +12,7 @@
     "babel-core": "^5.8.32",
     "babel-loader": "^5.3.2",
     "babel-plugin-react-transform": "^1.1.1",
-    "react-native": "^0.14.0",
+    "react-native": "^0.15.0-rc",
     "react-native-webpack-server": "file:../..",
     "react-transform-hmr": "^1.0.1",
     "webpack": "^1.12.2",
