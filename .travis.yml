@@ -1,11 +1,27 @@
 language: node_js
 node_js:
   - "4"
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
 env:
-  - NPM_VERSION=2
-  - NPM_VERSION=3
+  - CXX=g++-4.8 NPM_VERSION=2 RN_VERSION=0.14
+  - CXX=g++-4.8 NPM_VERSION=3 RN_VERSION=0.13
+  - CXX=g++-4.8 NPM_VERSION=3 RN_VERSION=0.14
+  - CXX=g++-4.8 NPM_VERSION=3 RN_VERSION=0.15.0-rc
 before_install:
   - npm install -g npm@$NPM_VERSION
 script:
-  - cd $TRAVIS_BUILD_DIR/Examples/BabelES6 && npm install && npm run bundle
-  - cd $TRAVIS_BUILD_DIR/Examples/CoffeeScript && npm install && npm run bundle
+  - >
+    cd $TRAVIS_BUILD_DIR/Examples/BabelES6 &&
+    npm install &&
+    npm install react-native@$RN_VERSION &&
+    npm run bundle
+  - >
+    cd $TRAVIS_BUILD_DIR/Examples/CoffeeScript &&
+    npm install &&
+    npm install react-native@$RN_VERSION &&
+    npm run bundle
