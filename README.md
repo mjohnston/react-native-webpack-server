@@ -5,6 +5,10 @@ react-native-webpack-server is a development server that leverages the [Webpack 
 [![react-native-webpack channel on slack](https://img.shields.io/badge/discord-%23react--native--webpack%20%40%20reactiflux-61dafb.svg?style=flat-square)](http://www.reactiflux.com)
 [![Build Status](https://travis-ci.org/mjohnston/react-native-webpack-server.svg)](https://travis-ci.org/mjohnston/react-native-webpack-server)
 
+## LOOKING FOR A MAINTAINER
+
+RNWS is not actively maintained; if you'd like to help, leave a comment on [#143](https://github.com/mjohnston/react-native-webpack-server/issues/143)!
+
 ## Installing
 
 ```shell
