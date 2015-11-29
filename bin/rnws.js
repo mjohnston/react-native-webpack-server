@@ -147,6 +147,7 @@ commonOptions(program.command('bundle'))
       .then(doBundle)
       .finally(() => {
         server.stop();
+        process.exit(0);
       });
   });
 
