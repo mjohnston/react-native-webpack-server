@@ -7,7 +7,7 @@ const packageJson = require('../package.json');
 const createBundle = require('../lib/createBundle');
 const Server = require('../lib/Server');
 
-function normalizePlatforms(options) {
+function normalizeOptions(options) {
   options.platforms = [];
   if (options.android) {
     options.platforms.push('android');
@@ -15,6 +15,16 @@ function normalizePlatforms(options) {
   if (options.ios) {
     options.platforms.push('ios');
   }
+
+  if (options.projectRoots) {
+    options.projectRoots = options.projectRoots.split(',')
+      .map(dir => path.resolve(process.cwd(), dir));
+  }
+  if (options.assetRoots) {
+    options.assetRoots = options.assetRoots.split(',')
+      .map(dir => path.resolve(process.cwd(), dir));
+  }
+
   return options;
 }
 
@@ -89,6 +99,16 @@ function commonOptions(program) {
       'index.ios'
     )
     .option(
+      '--projectRoots [projectRoots]',
+      'List of comma-separated paths for the react-native packager to consider as project root directories',
+      null
+    )
+    .option(
+      '--assetRoots [assetRoots]',
+      'List of comma-separated paths for the react-native packager to consider as asset root directories',
+      null
+    )
+    .option(
       '-r, --resetCache',
       'Remove cached react-native packager files [false]',
       false
@@ -99,7 +119,7 @@ commonOptions(program.command('start'))
   .description('Start the webpack server.')
   .option('-r, --hot', 'Enable hot module replacement. [false]', false)
   .action(function(options) {
-    const opts = normalizePlatforms(options.opts());
+    const opts = normalizeOptions(options.opts());
     const server = createServer(opts);
     server.start();
   });
@@ -127,7 +147,7 @@ commonOptions(program.command('bundle'))
     false
   )
   .action(function(options) {
-    const opts = normalizePlatforms(options.opts());
+    const opts = normalizeOptions(options.opts());
     const server = createServer(opts);
     const bundlePaths = {
       android: opts.androidBundlePath,
