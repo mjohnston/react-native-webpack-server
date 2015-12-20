@@ -25,13 +25,13 @@ var config = {
       test: /\.js$/,
       include: [
         path.resolve(__dirname, 'src'),
+        path.resolve(__dirname, 'node_modules/react-native/Libraries/react-native'),
         path.resolve(__dirname, 'node_modules/react-native-navbar'),
       ],
       loader: 'babel',
       query: {
-        stage: 0,
-        plugins: []
-      }
+        presets: ['es2015', 'stage-0', 'react'],
+      },
     }]
   },
 
