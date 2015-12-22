@@ -7,12 +7,16 @@ const packageJson = require('../package.json');
 const createBundle = require('../lib/createBundle');
 const Server = require('../lib/Server');
 
-/**
- * Create a new array with falsey values removed
- * @param  {Array} arr An array
- * @return {Array}     The array with falsey values removed
- */
-const compact = arr => arr.filter(Boolean);
+function normalizePlatforms(options) {
+  options.platforms = [];
+  if (options.android) {
+    options.platforms.push('android');
+  }
+  if (options.ios) {
+    options.platforms.push('ios');
+  }
+  return options;
+}
 
 /**
  * Create a server instance using the provided options.
@@ -95,7 +99,7 @@ commonOptions(program.command('start'))
   .description('Start the webpack server.')
   .option('-r, --hot', 'Enable hot module replacement. [false]', false)
   .action(function(options) {
-    const opts = options.opts();
+    const opts = normalizePlatforms(options.opts());
     const server = createServer(opts);
     server.start();
   });
@@ -123,25 +127,22 @@ commonOptions(program.command('bundle'))
     false
   )
   .action(function(options) {
-    const opts = options.opts();
+    const opts = normalizePlatforms(options.opts());
     const server = createServer(opts);
+    const bundlePaths = {
+      android: opts.androidBundlePath,
+      ios: opts.iosBundlePath,
+    };
 
-    const doBundle = () => Promise.all(compact([
-      opts.android && createBundle(server, {
-        platform: 'android',
-        targetPath: opts.androidBundlePath,
+    const doBundle = () => Promise.all(opts.platforms.map(
+      (platform) => createBundle(server, {
+        platform: platform,
+        targetPath: bundlePaths[platform],
         dev: !opts.optimize,
         minify: opts.optimize,
         sourceMap: opts.sourceMap,
-      }),
-      opts.ios && createBundle(server, {
-        platform: 'ios',
-        targetPath: opts.iosBundlePath,
-        dev: !opts.optimize,
-        minify: opts.optimize,
-        sourceMap: opts.sourceMap,
-      }),
-    ]));
+      })
+    ));
 
     server.start()
       .then(doBundle)
