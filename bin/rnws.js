@@ -112,6 +112,11 @@ function commonOptions(program) {
       '-r, --resetCache',
       'Remove cached react-native packager files [false]',
       false
+    )
+    .option(
+      '--hasteExternals',
+      'Allow direct import of React Native\'s internal Haste modules [false]',
+      false
     );
 }
 
