@@ -115,7 +115,12 @@ function commonOptions(program) {
     )
     .option(
       '--hasteExternals',
-      'Allow direct import of React Native\'s internal Haste modules [false]',
+      // React Native 0.23 rewrites `require('HasteModule')` calls to
+      // `require(42)` where 42 is an internal module id. That breaks
+      // treating Haste modules simply as commonjs modules and leaving
+      // the `require()` call in the source. So for now this feature
+      // only works with React Native <0.23.
+      'Allow direct import of React Native\'s (<0.23) internal Haste modules [false]',
       false
     );
 }
