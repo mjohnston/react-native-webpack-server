@@ -9,7 +9,8 @@ addons:
     packages:
     - g++-4.8
 env:
-  - CXX=g++-4.8 NPM_VERSION=3 RN_VERSION=0.21
+  - CXX=g++-4.8 NPM_VERSION=2 RN_VERSION=0.21
+  - CXX=g++-4.8 NPM_VERSION=2 RN_VERSION=0.25
   - CXX=g++-4.8 NPM_VERSION=3 RN_VERSION=0.25
 before_install:
   - npm install -g npm@$NPM_VERSION

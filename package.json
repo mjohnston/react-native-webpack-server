@@ -39,6 +39,7 @@
     "node": ">=4.0.0"
   },
   "peerDependencies": {
+    "react": ">=0.14.5",
     "react-native": ">=0.21.0",
     "webpack": ">=1.8.4",
     "webpack-dev-server": ">=1.8.0"
