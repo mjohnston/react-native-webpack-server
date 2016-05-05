@@ -12,11 +12,17 @@ env:
   - CXX=g++-4.8 NPM_VERSION=2 RN_VERSION=0.21
   - CXX=g++-4.8 NPM_VERSION=2 RN_VERSION=0.25
   - CXX=g++-4.8 NPM_VERSION=3 RN_VERSION=0.25
+
 before_install:
   - npm install -g npm@$NPM_VERSION
-script:
+
+install:
   - >
     cd $TRAVIS_BUILD_DIR/Examples/BabelES6 &&
     npm install &&
     npm install react-native@$RN_VERSION &&
+
+script:
+  - >
+    cd $TRAVIS_BUILD_DIR/Examples/BabelES6 &&
     npm run bundle
