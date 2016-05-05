@@ -20,6 +20,10 @@ function normalizeOptions(options) {
     options.projectRoots = options.projectRoots.split(',')
       .map(dir => path.resolve(process.cwd(), dir));
   }
+  if (options.root) {
+    options.root = options.root.split(',')
+      .map(dir => path.resolve(process.cwd(), dir));
+  }
   if (options.assetRoots) {
     options.assetRoots = options.assetRoots.split(',')
       .map(dir => path.resolve(process.cwd(), dir));
@@ -101,6 +105,11 @@ function commonOptions(program) {
     .option(
       '--projectRoots [projectRoots]',
       'List of comma-separated paths for the react-native packager to consider as project root directories',
+      null
+    )
+    .option(
+      '--root [root]',
+      'List of comma-separated paths for the react-native packager to consider as additional directories. If provided, these paths must include react-native and its dependencies.',
       null
     )
     .option(
