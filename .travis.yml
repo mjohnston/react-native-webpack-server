@@ -20,8 +20,3 @@ script:
     npm install &&
     npm install react-native@$RN_VERSION &&
     npm run bundle
-  - >
-    cd $TRAVIS_BUILD_DIR/Examples/CoffeeScript &&
-    npm install &&
-    npm install react-native@$RN_VERSION &&
-    npm run bundle
