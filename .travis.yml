@@ -20,7 +20,7 @@ install:
   - >
     cd $TRAVIS_BUILD_DIR/Examples/BabelES6 &&
     npm install &&
-    npm install react-native@$RN_VERSION &&
+    npm install react-native@$RN_VERSION
 
 script:
   - >
